@@ -27,8 +27,42 @@ const createPatient = async (req: Request) => {
   return result;
 };
 
-const getAllFromDB = async () => {
-  const result = await prisma.user.findMany();
+const getAllFromDB = async ({
+  page,
+  limit,
+  searchTerm,
+  sortBy,
+  sortOrder,
+}: {
+  page: number;
+  limit: number;
+  searchTerm?: any;
+  sortBy: any;
+  sortOrder: any;
+}) => {
+  const pageNumber = page || 1;
+  const limitNumber = limit || 10;
+  const skip = (pageNumber - 1) * limitNumber;
+
+  const result = await prisma.user.findMany({
+    skip,
+    take: limit,
+
+    where: {
+      email: {
+        contains: searchTerm,
+        mode: "insensitive",
+      },
+    },
+    orderBy:
+      sortBy && sortOrder
+        ? {
+            [sortBy]: sortOrder,
+          }
+        : {
+            createdAt: "desc",
+          },
+  });
   return result;
 };
 
