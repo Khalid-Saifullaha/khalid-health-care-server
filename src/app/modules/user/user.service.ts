@@ -33,12 +33,16 @@ const getAllFromDB = async ({
   searchTerm,
   sortBy,
   sortOrder,
+  role,
+  status,
 }: {
   page: number;
   limit: number;
   searchTerm?: any;
   sortBy: any;
   sortOrder: any;
+  role: any;
+  status: any;
 }) => {
   const pageNumber = page || 1;
   const limitNumber = limit || 10;
@@ -46,13 +50,15 @@ const getAllFromDB = async ({
 
   const result = await prisma.user.findMany({
     skip,
-    take: limit,
+    take: limitNumber,
 
     where: {
       email: {
         contains: searchTerm,
         mode: "insensitive",
       },
+
+      status: status,
     },
     orderBy:
       sortBy && sortOrder
