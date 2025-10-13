@@ -4,7 +4,7 @@ import sendResponse from "../../shared/sendResponse";
 import { AuthService } from "./auth.service";
 
 const login = catchAsync(async (req: Request, res: Response) => {
-  console.log("Login Body:", req.body);
+  // console.log("Login Body:", req.body);
   const result = await AuthService.login(req.body);
   const { accessToken, refreshToken, needPasswordChange } = result;
 
