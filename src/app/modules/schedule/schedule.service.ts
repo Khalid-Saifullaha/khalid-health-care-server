@@ -3,6 +3,7 @@ import { prisma } from "../../shared/prisma";
 import { any } from "zod";
 import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { Prisma } from "@prisma/client";
+import { IJWTPayload } from "../../types/common";
 
 const insertIntoDB = async (payload: any) => {
   const { startTime, endTime, startDate, endDate } = payload;
@@ -65,7 +66,11 @@ const insertIntoDB = async (payload: any) => {
   }
 };
 
-const schedulesForDoctor = async (fillters: any, options: IOptions) => {
+const schedulesForDoctor = async (
+  user: IJWTPayload,
+  fillters: any,
+  options: IOptions
+) => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
   const { startDateTime: filterStartDateTime, endDateTime: filterEndDateTime } =
