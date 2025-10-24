@@ -34,6 +34,17 @@ const updateIntoDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await DoctorService.getByIdFromDB(id);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Doctor retrieval successfully",
+    data: result,
+  });
+});
+
 const getAISuggestions = catchAsync(async (req: Request, res: Response) => {
   const result = await DoctorService.getAISuggestions(req.body);
   sendResponse(res, {
@@ -48,4 +59,5 @@ export const DoctorController = {
   getAllFromDB,
   updateIntoDB,
   getAISuggestions,
+  getByIdFromDB,
 };
