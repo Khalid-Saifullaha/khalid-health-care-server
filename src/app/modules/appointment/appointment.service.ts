@@ -69,7 +69,7 @@ const createAppointment = async (
       line_items: [
         {
           price_data: {
-            currency: "usd",
+            currency: "bdt",
             product_data: {
               name: `Appointment with ${doctorData.name}`,
             },
@@ -86,9 +86,9 @@ const createAppointment = async (
       cancel_url: `https://github.com/Khalid-Saifullaha`,
     });
 
-    console.log(session);
+    // console.log(session);
 
-    return appointmentData;
+    return { paymentUrl: session.url };
   });
 
   return result;
