@@ -8,7 +8,7 @@ const handleStripeWebhookEvent = catchAsync(
   async (req: Request, res: Response) => {
     const sig = req.headers["stripe-signature"] as string;
     const webhookSecret =
-      "whsec_7aa0e876564d7172ed1ebbda82f18cd6c740ac93ff44efecbf654c0d71bf3f1c";
+      "whsec_4a594ede2d69739593d34cd1add62a2858cd78545dd496578bf313549a2ce5eb";
 
     let event;
     try {
